@@ -9,3 +9,4 @@ pyproject.toml
 
 # Virtual environments
 .venv
+artifacts
