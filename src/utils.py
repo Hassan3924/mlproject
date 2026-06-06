@@ -3,9 +3,10 @@ import os
 import numpy as np
 import pandas as pd
 from src.exception import CustomException
-
+import dill
 
 def save_object(file_path, obj):
+    
     try:
         dir_path = os.path.dirname(file_path)
 

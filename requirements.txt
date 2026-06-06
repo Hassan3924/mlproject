@@ -16,4 +16,5 @@ Flask-Cors
 catboost
 xgboost
 statsmodels
+dill
 # -e .

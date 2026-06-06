@@ -9,7 +9,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from src.exception import CustomException
 from src.logger import logging
 import os
-
+from src.utils import save_object
 @dataclass
 class DataTransformationConfig:
     preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
@@ -20,11 +20,12 @@ class DataTransformation:
     
     def get_data_transformer_object(self):
         """This function is responsible for data transformation"""
+
         try:
             numerical_columns = ['writing_score', 'reading_score']
             categorical_columns = [
                 'gender',
-                'race_ethinicity',
+                'race_ethnicity',
                 'parental_level_of_education',
                 'lunch',
                 'test_preparation_course'
@@ -39,9 +40,8 @@ class DataTransformation:
 
             cat_pipeline = Pipeline(
                 steps = [
-                    ('imputer', SimpleImputer(strategy = 'most_frequent'), #
-                     ('one_hot_encoder', OneHotEncoder()), # Will make the categorical columsn into 1s and 0s
-                     'scaler', StandardScaler()) # Scaling obviously
+                    ('imputer', SimpleImputer(strategy = 'most_frequent')), #
+                     ('one_hot_encoder', OneHotEncoder()) # Will make the categorical columsn into 1s and 0s
                 ]
             )
             logging.info("Categorical columns standard scaling completed")
@@ -105,7 +105,7 @@ class DataTransformation:
                 self.data_transformation_config.preprocessor_obj_file_path
             )
 
-        except:
-            pass
-
-
+        except Exception as e:
+            raise CustomException(e, sys)
+        
+            
