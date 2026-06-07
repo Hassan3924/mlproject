@@ -44,6 +44,7 @@ class DataTransformation:
                      ('one_hot_encoder', OneHotEncoder()) # Will make the categorical columsn into 1s and 0s
                 ]
             )
+            
             logging.info("Categorical columns standard scaling completed")
             logging.info("Categorical columns encoding completed")
 
